@@ -14,7 +14,7 @@ public:
     Aurtus() : window(sf::VideoMode(1200, 800), "Aurtus"), Tex_background(), Spr_bck(), Top(), rocket(), guy(),end{0}
     {
 
-        Tex_background.loadFromFile("Assets\\BCK.jpg");
+        Tex_background.loadFromFile("Assets\\BCK2.jpg");
         Global_Tex.loadFromFile("Assets\\roc.png");
         Player123.loadFromFile("Assets\\Player.png");
         Spr_bck.setTexture(Tex_background);
@@ -74,7 +74,7 @@ void genrocket(Aurtus *A)
     while(1)
     {
         int numofroc = A->rocket.countroc();
-        if (numofroc < 15)
+        if (numofroc < 1500)
         {
             Sleep(dist6(rng));
             A->rocket.newRoc((float)dist7(rng), A->Global_Tex);
