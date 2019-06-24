@@ -11,7 +11,7 @@ class Aurtus
 public:
     void run();
     void genrocket();
-    Aurtus() : window(sf::VideoMode(1200, 800), "Aurtus"), Tex_background(), Spr_bck(), Top(), rocket(), guy(),end{0}
+    Aurtus() : window(sf::VideoMode(1200, 800), "Aurtus"), Tex_background(), Spr_bck(), Top(), rocket(), guy(), end{0}
     {
 
         Tex_background.loadFromFile("Assets\\BCK2.jpg");
@@ -48,16 +48,17 @@ void Aurtus::run()
         {
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
-                {end=1;
+            {
+                end = 1;
                 window.close();
-                }
+            }
         }
 
         window.draw(Spr_bck);
         window.draw(Top);
         rocket.move();
         rocket.drawrockets(window);
-
+        
         guy.render(window);
         window.display();
     }
@@ -65,34 +66,39 @@ void Aurtus::run()
 
 void genrocket(Aurtus *A)
 {
-            std::random_device dev;
-            std::default_random_engine eng{dev()};
-            std::mt19937 rng(dev());
-            std::uniform_int_distribution<std::mt19937::result_type> dist6(500, 1000);
-           
-            std::uniform_int_distribution<std::mt19937::result_type> dist7(100, 1100);
-    while(1)
+    std::random_device dev;
+    std::default_random_engine eng{dev()};
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(500, 1000);
+
+    std::uniform_int_distribution<std::mt19937::result_type> dist7(100, 1100);
+    while (1)
     {
         int numofroc = A->rocket.countroc();
-        if (numofroc < 1500)
+        if (numofroc < 11)
         {
             Sleep(dist6(rng));
             A->rocket.newRoc((float)dist7(rng), A->Global_Tex);
-            std::cout<<dist7(rng)<<"\n"<<numofroc<<"\n";
-            if(A->end==1)
+            
+            std::cout << "\n"
+                      << numofroc << "\n";
+            
+            if (A->end == 1)
             {
                 break;
             }
-
+            
         }
+        A->rocket.deletemanager(0.0,0.0);
+
     }
 }
 
 int main()
 {
-     Aurtus A;
-    sf::Thread a(&genrocket,&A);
-   a.launch();
+    Aurtus A;
+    sf::Thread a(&genrocket, &A);
+    a.launch();
     A.run();
     a.terminate();
 }

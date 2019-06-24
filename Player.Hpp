@@ -45,7 +45,7 @@ void Player::controls()
         sf::Vector2f a = guy.getPosition();
         if (guy.getPosition().x < 950)
             {guy.setPosition(a.x + 5, a.y);
-            std::cout<<a.x<<std::endl;
+            // std::cout<<a.x<<std::endl;
             }
         else{;}
         // if (guy.getRotation() > 270 || (guy.getRotation() > 0 && guy.getRotation() < 90))

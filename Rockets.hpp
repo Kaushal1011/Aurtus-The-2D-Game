@@ -2,7 +2,7 @@
 #include <iostream>
 class Rockets
 {
-public:
+    public:
     int id;
     sf::Sprite Data;
     Rockets *next;
@@ -10,12 +10,14 @@ public:
     {
         ;
     }
+
     void newRoc(double y, const sf::Texture &Global_Tex);
     void deleteroc(int idel);
     void move();
     void drawrockets(sf::RenderWindow &window);
     int countroc();
     void render();
+    void deletemanager(double x, double y);
 };
 
 void Rockets::newRoc(double y, const sf::Texture &Global_Tex)
@@ -111,4 +113,30 @@ int Rockets::countroc()
         temp = temp->next;
     }
     return a;
+}
+
+void Rockets::deletemanager(double x, double y)
+{
+    Rockets *temp{next};
+    Rockets *del{nullptr};
+    while(temp!=nullptr)
+    {
+        sf::Vector2f a=temp->Data.getPosition();
+        // std::cout<<a.x<<"\n";
+        if((a.x<-1050))
+        {
+            del=temp;
+            temp=temp->next;
+            
+            if(del->id!=1)
+            {std::cout<<std::endl<<del->id<<std::endl;
+            deleteroc(del->id);
+            }
+            
+        }
+        else
+        {
+            temp=temp->next;
+        }
+    }
 }
